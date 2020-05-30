@@ -24,27 +24,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/Data',
-  //   name: 'Data',
-  //   component: Home,
-  //   redirect: '/Data/Tree',
-  //   meta: { title: '数据' },
-  //   children: [
-  //     {
-  //       path: 'Table',
-  //       name: 'Table',
-  //       component: () => import('../views/Table'),
-  //       meta: { login_require: true, title: 'Table表格' }
-  //     },
-  //     {
-  //       path: 'Tree',
-  //       name: 'Tree',
-  //       component: () => import('../views/Tree'),
-  //       meta: { login_require: true, title: 'Tree树形控件' }
-  //     }
-  //   ]
-  // },
   {
     path: '/error',
     component: Layout,
@@ -93,11 +72,19 @@ const routes = [
   {
     path: '/News',
     component: Layout,
+    redirect: '/News/Home',
+    // meta: { login_require: true, title: '知乎日报' },
     children: [
       {
         path: 'Home',
         component: () => import('../views/News/Home.vue'),
-        meta: { login_require: true, title: '知乎日报' }
+        meta: { login_require: true, title: '知乎日报', keepAlive: true }
+      },
+      {
+        path: 'Detail/:id',
+        name: 'Detail',
+        component: () => import('../views/News/Detail.vue'),
+        meta: { login_require: true, title: '知乎日报-详请页' }
       }
     ]
   }
