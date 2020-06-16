@@ -9,6 +9,20 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <script>
+      ~ function () {
+          function computed () {
+            let html = document.documentElement,
+                deviceW = html.clientWidth,
+                desigW = 750,
+                ratio = deviceW / desigW * 100
+            if (deviceW > 750) ratio = 50
+            html.style.fontSize = ratio + 'px'
+          }
+          computed()
+          window.addEventListener('resize', computed)
+      }()
+    </script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

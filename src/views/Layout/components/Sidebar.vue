@@ -12,7 +12,7 @@
             :index="value.title"
             @click="open(value.path)">
             <i :class="value.icon"></i>
-            <span :class="hide">{{value.title}}</span>
+            <span :class="hide"  >{{value.title}}</span>
           </el-menu-item>
           <el-submenu v-else :index="value.title">
             <template slot="title">
@@ -73,6 +73,7 @@ export default {
         },
         { title: '知乎日报', icon: 'el-icon-s-comment', path: '/News' },
         { title: '抖音', icon: 'el-icon-water-cup', path: '/Douyin' },
+        { title: '钉钉日志', icon: 'el-icon-s-order', path: '/Journal' },
         { title: '错误页面', icon: 'el-icon-error', path: '/error/404' }
       ],
       title: null
@@ -81,7 +82,7 @@ export default {
   computed: {
     ...mapState(['show', 'ismobile']),
     hide () {
-      return { hide: !this.show && !this.ismobile }
+      return { hide: !this.ismobile && !this.show }
     },
     classObj () {
       return {
@@ -127,6 +128,7 @@ export default {
 <style lang="scss" scoped>
 .hide {
   visibility: hidden;
+  // z-index: -99;
   // display: none;
 }
 .mobile {

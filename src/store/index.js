@@ -5,8 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 登录
     username: '',
     password: '',
+    // 侧边栏
     show: true,
     ismobile: false
   },
@@ -16,10 +18,12 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    // 登录
     setLogin (state, val) {
       state.username = val
       sessionStorage.setItem('loginusername', val)
     },
+    // 侧边栏
     close (state) {
       state.show = false
     },

@@ -48,7 +48,7 @@ export default {
   @media screen and (min-width: 1048px) {
     .app-container {
       width: 90%;
-      margin: 120px auto;
+      padding: 100px 0;
     }
     .el-col {
       width: 50%;

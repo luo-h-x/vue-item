@@ -29,9 +29,11 @@ export default {
   // },
   activated () {
     window.addEventListener('scroll', this.loadMore, true)
+    this.setScrollTop()
   },
   deactivated () {
     window.removeEventListener('scroll', this.loadMore, true)
+    this.getScrollTop()
   },
   async created () {
     const result = await api.last()
@@ -52,13 +54,26 @@ export default {
     skip (id) {
       this.$router.push(`/News/Detail/${id}`)
     },
+    // 加载更多
     loadMore () {
       const top = document.getElementById('loading').getBoundingClientRect().top
       if (top < window.innerHeight && this.loading) {
         this.loading = false
         this.load()
       }
-      // console.log(top)
+    },
+    getScrollTop () {
+      const main = document.getElementsByClassName('el-main')[0]
+      if (main) {
+        const top = main.scrollTop
+        sessionStorage.setItem('scrolltop', top)
+      }
+    },
+    setScrollTop () {
+      const main = document.getElementsByClassName('el-main')[0]
+      if (main) {
+        main.scrollTop = sessionStorage.getItem('scrolltop', top)
+      }
     }
   }
 }

@@ -5,11 +5,11 @@ import Layout from '../views/Layout'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/Login',
-  //   name: 'Login',
-  //   component: () => import('../views/Login')
-  // },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: () => import('../views/Login')
+  },
   {
     path: '/',
     name: 'Layout',
@@ -84,27 +84,56 @@ const routes = [
         path: 'Detail/:id',
         name: 'Detail',
         component: () => import('../views/News/Detail.vue'),
-        meta: { login_require: true, title: '知乎日报-详请页' }
+        meta: { login_require: true, title: '知乎日报' }
       }
     ]
-  }
-  // { path: '*', redirect: '/404', hidden: true }
+  },
+  {
+    path: '/Douyin',
+    component: Layout,
+    redirect: '/Douyin/',
+    children: [
+      {
+        path: '/',
+        component: () => import('../views/Douyin'),
+        meta: { login_require: true, title: '抖音' }
+      }
+    ]
+  },
+  {
+    path: '/Journal',
+    component: Layout,
+    redirect: '/Journal/Home',
+    children: [
+      {
+        path: 'Home',
+        component: () => import('../views/Journal/Home.vue'),
+        meta: { login_require: true, title: '钉钉日志' }
+      },
+      {
+        path: 'Handle',
+        component: () => import('../views/Journal/Handle.vue'),
+        meta: { login_require: true, title: '钉钉日志' }
+      }
+    ]
+  },
+  { path: '*', redirect: '/error/404', hidden: true }
 ]
 
 const router = new VueRouter({
   routes
 })
 
-// router.beforeEach(function (to, from, next) {
-//   // console.log(to.matched)
-//   if (to.meta.login_require) {
-//     if (sessionStorage.getItem('loginusername')) {
-//       next()
-//     } else {
-//       next('/Login')
-//     }
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach(function (to, from, next) {
+  // console.log(to.matched)
+  if (to.meta.login_require) {
+    if (sessionStorage.getItem('loginusername')) {
+      next()
+    } else {
+      next('/Login')
+    }
+  } else {
+    next()
+  }
+})
 export default router
